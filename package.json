@@ -1,0 +1,30 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdc192000/bamazon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jdc192000/bamazon/issues"
+  },
+  "homepage": "https://github.com/jdc192000/bamazon#readme",
+  "dependencies": {
+    "clear": "^0.1.0",
+    "columnify": "^1.5.4",
+    "dotenv": "^5.0.1",
+    "figlet": "^1.2.0",
+    "inquirer": "^5.2.0",
+    "mysql": "^2.13.0",
+    "npm": "^5.8.0"
+  },
+  "devDependencies": {}
+}
