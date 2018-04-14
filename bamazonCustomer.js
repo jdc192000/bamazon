@@ -6,7 +6,6 @@ var figlet = require('figlet');
 
 const keys = require("./keys");
 var mysqlKeys = keys.mysqlKeys;
-var display = "";
 
 var connection = mysql.createConnection(mysqlKeys);
 
@@ -19,15 +18,6 @@ connection.connect(function (err) {
 function buyProducts() {
     var remainingStock = 0;
     clear();
-
-    figlet('BAMAZON', function(err, data) {
-        if (err) {
-            console.log('Something went wrong...');
-            console.dir(err);
-            return;
-        }
-        console.log(data)
-    });
 
     connection.query("SELECT * FROM products where stock_quantity > '0'", function (err, results) {
         if (err) throw err;
@@ -80,13 +70,17 @@ function buyProducts() {
                     if (err) throw err;
 
                     remainingStock = results2[0].stock_quantity - answer.quantity;
+                    var totalSales = (results2[0].price * answer.quantity) + results2[0].product_sales;
 
                     if (remainingStock >= 0) {
                         connection.query(
-                            "UPDATE products SET ? WHERE ?",
+                            "UPDATE products SET ?, ? WHERE ?",
                             [
                                 {
                                     stock_quantity: remainingStock
+                                },
+                                {
+                                    product_sales: totalSales
                                 },
                                 {
                                     item_id: answer.item

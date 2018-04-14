@@ -221,9 +221,7 @@ function addInventory() {
                             setTimeout(addInventory, 1000 * 5);
                         }
                     );
-
                 })
-                // cleanExit();
             });
     });
 }
@@ -231,13 +229,17 @@ function addInventory() {
 function addNewProduct() {
     clear();
 
-    connection.query("select distinct department_name from products", function (err, results) {
+    // Changed code from:
+    // connection.query("select distinct department_name from products", function (err, results) {
+    // to the following with the implementation of bamazonSupervisor.js
+
+    connection.query("select department_name from departments", function (err, results) {
         if (err) throw err;
         inquirer
             .prompt([
                 {
                     name: "department",
-                    type: "rawlist",
+                    type: "list",
                     message: "Add product to which department?",
                     choices: function () {
                         var choiceArray = [];
@@ -249,24 +251,24 @@ function addNewProduct() {
 
                 },
                 {
-                    name: "description",
+                    name: "newDescription",
                     type: "input",
                     message: "Product description?"
                 },
                 {
-                    name: "price",
+                    name: "newPrice",
                     type: "input",
                     message: "Product price?"
                 },
                 {
-                    name: "stock",
+                    name: "newStock",
                     type: "input",
                     message: "Amount in stock?"
                 }
             ])
             .then(function (answer) {
                 connection.query(
-                    "insert into products (product_name, department_name, price, stock_quantity) values (?, ?, ?, ?)", [answer.description, answer.department, answer.price, answer.stock], function (err) {
+                    "insert into products (product_name, department_name, price, stock_quantity) values (?, ?, ?, ?)", [answer.newDescription, answer.department, answer.newPrice, answer.newStock], function (err) {
                         if (err) throw err;
                         clear();
                         console.log("New product added!");
