@@ -184,7 +184,7 @@ function addInventory() {
                         } else {
                             if (value.toUpperCase() === "R") {
                                 clear();
-                                mainMenu();
+                                setTimeout(function(){mainMenu()}, 1000);
                             } else {
                                 return false;
                             }
@@ -253,7 +253,7 @@ function addNewProduct() {
                 {
                     name: "newDescription",
                     type: "input",
-                    message: "Product description?"
+                    message: "Product description?",
                 },
                 {
                     name: "newPrice",
